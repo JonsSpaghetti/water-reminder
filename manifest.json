@@ -1,0 +1,42 @@
+{
+    "manifest_version": 2,
+    "name": "Water Reminder",
+    "version": "1.0",
+
+    "description": "Customizable timer to remind you to drink water periodically.",
+    "icons": {
+        "48": "icons/water-48.png"
+    },
+
+    "content_scripts": [
+        {
+            "matches": ["<all_urls>"],
+            "js": ["content.js"],
+            "run_at": "document_end", //prevents issues w/ page loading
+            "all_frames": true
+        }
+    ],
+
+    //need to make this a bg script bc otherwise we don't get alarms/notifications.
+    "background": {
+        "scripts": ["timer.js"]
+    },
+    "permissions": [
+        "alarms",
+        "tabs",
+        "notifications",
+        "storage"
+    ],
+
+    //Adding browser button
+    "browser_action": {
+        "default_icon": {
+            "48": "icons/water-48.png"
+        },
+        "default_title": "Water Reminder",
+        "default_popup": "popup.html"
+    },
+
+    "options_page": "options.html"
+
+}
